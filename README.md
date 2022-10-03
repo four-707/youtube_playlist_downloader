@@ -26,9 +26,6 @@
 #### Multiple task together
 ![image](https://user-images.githubusercontent.com/103592889/193610097-d56bd186-87ad-428e-85b7-d1b08f92a0f4.png)
 
-##### Cancel or clear download
-![image](https://user-images.githubusercontent.com/103592889/193611086-56e7ab1c-84df-41bf-8d4b-17c890b913ae.png)
-
 ##### Downlading complete status
 ![image](https://user-images.githubusercontent.com/103592889/193611177-9b5441b1-94cd-462e-9188-e6c1299b47cd.png)
 
