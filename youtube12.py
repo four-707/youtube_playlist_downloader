@@ -1,4 +1,6 @@
 from tkinter import *
+import tkinter
+import tkinter.ttk as ttk
 from tkinter import messagebox
 from tkinter import filedialog
 from pytube import YouTube, Playlist, request
@@ -47,8 +49,9 @@ def error(flag):  # 1 for connection or link erroor #2 for download error
     else:
         pass
 def event_in_out(wid, clr):
-    wid.bind('<Leave>', lambda e: e.widget.config(bg=clr))
-    wid.bind('<Enter>', lambda e: e.widget.config(bg="light blue"))
+    # wid.bind('<Leave>', lambda e: e.widget.config(bg=clr))
+    # wid.bind('<Enter>', lambda e: e.widget.config(bg="light blue"))
+    pass
 
 def download(var_list):
     global item_queued, var_list_status
@@ -383,34 +386,35 @@ class gui(Tk):
 
     def label2(self):
         #-ading 2 buttons and entry and path------------
-        b1=Button(self.l2,text="ADD TO DOWNLOAD",bg="light goldenrod",height=1,command=lambda txt=self.main_text_wid:self.take_input_link(txt))
+        b1=ttk.Button(self.l2,text="ADD TO DOWNLOAD",command=lambda txt=self.main_text_wid:self.take_input_link(txt))
         b1.place(x=10,y=15)
         event_in_out(b1,"light goldenrod")
 
         mypath=StringVar()
         mypath.set(os.getcwd())
-        e1=Entry(self.l2,text=mypath,width=50,font=0)
-        e1.place(x=230,y=16)
+        ttk.Style().configure('pad.TEntry', padding='5 4 4 4')
+        e1=ttk.Entry(self.l2,text=mypath,width=50, font=('Monospace 10'), style='pad.TEntry')
+        e1.place(x=250,y=14)
         e1.bind("<Key>",lambda  a:"break")
         event_in_out(e1,"white")
 
-        b2 = Button(self.l2, text="PATH", bg="light goldenrod", height=1, command=lambda p=mypath: self.openpath(p))
-        b2.place(x=180, y=15)
+        b2 = ttk.Button(self.l2, text="PATH",  command=lambda p=mypath: self.openpath(p))
+        b2.place(x=150, y=15)
         event_in_out(b2,"light goldenrod")
         #-----setting type button and entry--------------------------------------------------------------
-        b3 = Button(self.l2, text="TYPE", bg="light goldenrod", height=1)
-        b3.place(x=850, y=15)
+        b3 = ttk.Button(self.l2, text="TYPE")
+        b3.place(x=700, y=15)
         event_in_out(b3, "light goldenrod")
         type_var = StringVar()
-        e2 = Entry(self.l2,text=type_var, width=15,font="5" )
-        e2.insert(0,"default (video)")
-        e2.place(x=895, y=16)
+        e2 = ttk.Entry(self.l2,text=type_var, width=12,font=('Monospace 10'), style='pad.TEntry' )
+        e2.insert(0,"Default (Video)")
+        e2.place(x=800, y=13)
         e2.bind("<Key>",lambda  a:"break")
         event_in_out(e2, "white")
         #------setting resolution button and entry--------------------------------------------------------
         # b4 = Button(self.l2, text="RESOLUTION", bg="light goldenrod", height=1,)
-        b4=Menubutton(self.l2, text="RESOLUTION", bg="light goldenrod", height=1,relief=RAISED,activebackground="light blue")
-        b4.place(x=1100, y=15)
+        b4=ttk.Menubutton(self.l2, text="RESOLUTION")
+        b4.place(x=1000, y=16)
         # event_in_out(b4, "light goldenrod")
         self.b4=b4
 
@@ -423,9 +427,9 @@ class gui(Tk):
         b4.bind('<Enter>',lambda event:info1())
 
         res_var = StringVar()
-        e3 = Entry(self.l2,text=res_var, width=30,)#font="5" )  # state=DISABLED,bg="white")
-        e3.insert(0,"default (360p)")
-        e3.place(x=1190, y=16)
+        e3 = ttk.Entry(self.l2,text=res_var, width=30, font=('Monospace 10'), style='pad.TEntry')#font="5" )  # state=DISABLED,bg="white")
+        e3.insert(0,"Default (360p)")
+        e3.place(x=1130, y=13)
         e3.bind("<Key>",lambda  a:"break")
         event_in_out(e3, "white")
         # self.e3=e3
@@ -462,7 +466,7 @@ class gui(Tk):
                 item.set(0)
             self.choose_res()
             resolution_list.append("360p")
-            self.var.set("default (360p)")
+            self.var.set("Default (360p)")
 
         view_menu.add_command(label="Select all", command=y)
         view_menu.add_command(label="Unselect all", command=ynot)
@@ -489,7 +493,7 @@ class gui(Tk):
         self.var.set(res_)
         if len(resolution_list) == 0:
             resolution_list.append("360p")
-            self.var.set("default (360p)")
+            self.var.set("Default (360p)")
 
     def choose(self,option,text,var): #optin 1==type,
         if option==1:
@@ -520,7 +524,7 @@ class gui(Tk):
         w2=int(_w2/5)
 
         v1 = StringVar()
-        em1 = Entry(fr1, text=v1, font="Arial,10,", width=w1-20, )  # ,width=100)
+        em1 = ttk.Entry(fr1, text=v1, font=("Arial" , 12), width=w1-20, )  # ,width=100)
         em1.grid(row=0,column=0)
         em1.bind('<Key>',lambda a:"break")
         v1.set(" TITLE")
@@ -528,7 +532,7 @@ class gui(Tk):
         options=[" STATUS."," SIZE."," % COMPLETE"," EXTENSION"," SPEED"]
         i=1
         for item in options:
-            em = Entry(fr1, font="Arial,10,", width=w2, )  # ,width=100)
+            em = ttk.Entry(fr1, font=("Arial" , 12), width=w2, )  # ,width=100)
             em.grid(row=0, column=i)
             em.insert(0,item)
             em.bind('<Key>', lambda a: "break")
@@ -545,7 +549,7 @@ class gui(Tk):
         var_list=[]
 
         v=StringVar()
-        em1 = Entry(self.l3_tableframe, text=v, width=w1+32, )  # ,width=100)
+        em1 = ttk.Entry(self.l3_tableframe, text=v, width=w1, font=("Arial" , 12))  # ,width=100)
         em1.grid(row=self.row, column=0)
         em1.bind('<Key>', lambda a: "break")
         em1.insert(0,f"{self.row}. {link}")
@@ -556,7 +560,7 @@ class gui(Tk):
         i = 1
         for item in options:
             v2 = StringVar()
-            em = Entry(self.l3_tableframe,text=v2, width=w2+8, )  # ,width=100)
+            em = ttk.Entry(self.l3_tableframe,text=v2, width=w2, font=("Arial" , 12))  # ,width=100)
             em.grid(row=self.row, column=i)
             em.insert(0, "-----")
             em.bind('<Key>', lambda a: "break")
@@ -633,23 +637,23 @@ start=gui()
 start.run_gui()
 
 clr="light goldenrod"
-exit_=Button(frame4,text="EXIT",bg=clr,command=exit_)
+exit_=ttk.Button(frame4,text="EXIT",command=exit_)
 exit_.grid(row=0,column=10,sticky=E,padx=30,pady=10)
 event_in_out(exit_,clr)
 
-start_download=Button(frame4,text="START  DOWNLOAD",bg=clr,command=start_down)
+start_download=ttk.Button(frame4,text="START  DOWNLOAD", command=start_down)
 start_download.grid(row=0,column=1,padx=20,pady=10)
 event_in_out(start_download,clr)
 
-pause_button=Button(frame4,text="PAUSE",bg=clr,state="disabled",command=pause_res)
+pause_button=ttk.Button(frame4,text="PAUSE",command=pause_res)
 pause_button.grid(row=0,column=2,padx=20,pady=10)
 event_in_out(pause_button,clr)
 
-delete_button=Button(frame4,text="CANCEL",bg=clr,state=DISABLED,command=cancel_)
+delete_button=ttk.Button(frame4,text="CANCEL",state=DISABLED,command=cancel_)
 delete_button.grid(row=0,column=3,padx=20,pady=10)
 event_in_out(delete_button,clr)
 
-allclear_button=Button(frame4,text="CLEAR ALL",bg=clr,command=clear_)
+allclear_button=ttk.Button(frame4,text="CLEAR ALL",command=clear_)
 allclear_button.grid(row=0,column=4)
 
 
