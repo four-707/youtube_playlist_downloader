@@ -10,7 +10,7 @@
 
 #### GUI
 - All  basic functionalities with decent gui design .
-- select path, file type, resolution, play\pause, stop ,clear exit etc is given.
+- select path, file type, resolution, play\pause, stop ,clear ,exit etc buttons are present.
 ![image](https://user-images.githubusercontent.com/103592889/193607469-7573e206-21a1-4d59-a3d6-d475ccdf3e43.png)
 
 #### Choose path to save files
